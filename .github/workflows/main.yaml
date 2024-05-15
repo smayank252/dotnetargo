@@ -59,8 +59,6 @@ jobs:
         git commit -m "${{ github.sha }}"
 
     - name: Commit the changes made
-      env:
-          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
       run: | 
-        git remote set-url origin https://smayank252:${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git
-        git push origin master
+        git remote set-url origin https://github.com/smayank252/dotnetargo.git
+        git push origin
