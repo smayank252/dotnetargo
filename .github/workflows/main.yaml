@@ -40,11 +40,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     
-    - name: Git configure
-      run: |
-        git config --global user.name 'smayank252'
-        git config --global user.email 'smayank252@gmail.com'
-
     - name: Update Image Tag Values
       run: |
         chart_dir="chart"
@@ -55,8 +50,9 @@ jobs:
   
     - name : Git commit
       run: |
-        git add .
-        git commit -m "${{ github.sha }}"
+        git config --global user.name 'smayank252'
+        git config --global user.email 'smayank252@gmail.com'
+        git commit -am "${{ github.sha }}"
         git push
 
     # - name: Commit the changes made
