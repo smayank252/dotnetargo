@@ -39,6 +39,11 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
+    
+    - name: Git configure
+      run: |
+        git config --global user.name 'smayank252'
+        git config --global user.email 'smayank252@gmail.com'
 
     - name: Update Image Tag Values
       run: |
@@ -46,14 +51,16 @@ jobs:
         new_image_tag=${{ github.sha }}
 
         # Update the values.yaml file with the new image tag
-        sed -i "s/^  tag: .*/  tag: $new_image_tag/" "$chart_dir/values.yaml"
+        sed -i "s/^  tag: .*/  tag: $new_image_tag/" "$chart_dir/values.yaml"\
+  
+    - name : Git commit
+      run: |
+        git add .
+        git commit -m "${{ github.sha }}"
 
     - name: Commit the changes made
       env:
           ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
       run: | 
-        git config --global user.name 'smayank252'
-        git config --global user.email 'smayank252@gmail.com'
-        git commit -am "updating image tag"
-        git remote set-url origin https://${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git
-        git push https:${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git master 
+        git remote set-url origin https://smayank252:${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git
+        git push origin master
