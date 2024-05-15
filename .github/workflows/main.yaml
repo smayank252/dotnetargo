@@ -60,5 +60,5 @@ jobs:
 
     - name: Commit the changes made
       run: | 
-        git remote set-url origin https://github.com/smayank252/dotnetargo.git
+        git remote set-url origin https://${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git
         git push origin
