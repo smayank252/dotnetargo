@@ -35,6 +35,8 @@ jobs:
     name: Update Helm Manifests
     runs-on: ubuntu-latest
     needs: build-and-push
+    env:
+      ACCESS_TOKEN: '${{secrets.ACTIONS_PAT}}'
 
     steps:
     - name: Check out code
@@ -52,10 +54,9 @@ jobs:
       run: |
         git config --global user.name 'smayank252'
         git config --global user.email 'smayank252@gmail.com'
+        git config --global credential.helper cache
         git commit -am "${{ github.sha }}"
-        git push
 
-    # - name: Commit the changes made
-    #   run: | 
-    #     git remote set-url origin https://${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git
-    #     git push origin
+    - name: Commit the changes made
+      run: | 
+        git clone https://${{secrets.ACTIONS_PAT}}@github.com/smayank252/dotnetargo.git
