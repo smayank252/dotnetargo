@@ -56,4 +56,4 @@ jobs:
         git config --global user.email 'smayank252@gmail.com'
         git commit -am "updating image tag"
         git remote set-url origin https://${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git
-        git push origin master
+        git push https:${{ secrets.ACTIONS_PAT }}@github.com/smayank252/dotnetargo.git master 
